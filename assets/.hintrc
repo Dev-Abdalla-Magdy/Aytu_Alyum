@@ -3,17 +3,16 @@
     "development"
   ],
   "hints": {
-    "axe/name-role-value": "off",
+    "button-type": "off",
     "compat-api/css": [
-      "default",
+      "off",
       {
         "ignore": [
-          "backdrop-filter",
-          "user-select"
+          "backdrop-filter"
         ]
       }
     ],
-    "button-type": "off"
+    "axe/name-role-value": "off"
   },
   "browserslist": [
     "defaults",
@@ -21,7 +20,6 @@
     "not and_ff <= 116",
     "not firefox <= 117",
     "not ios_saf <= 16.6",
-    "not safari <= 16.6",
-    "not ios_saf <= 16.6"
+    "not safari <= 16.6"
   ]
 }

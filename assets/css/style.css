@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +10,7 @@ body {
   background: rgba(0, 123, 123, 0.75);
   height: 100vh;
   width: 100vw;
+  font-family: "Rubik", sans-serif;
 }
 .app {
   min-height: 100%;
@@ -18,12 +21,48 @@ body {
   justify-content: space-around;
   text-align: center;
   position: relative;
+  padding-top: 80px;
+  gap: 20px;
 }
 @media (min-width: 768px) {
   .app {
     justify-content: center;
     gap: 50px;
   }
+}
+.contact {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  border-bottom: 1px solid #dddddd50;
+}
+#whatsapp,
+#info {
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#whatsapp i,
+#info i {
+  font-size: 40px;
+  border-radius: 10px;
+  color: #fff;
+  transition: all 0.5s ease;
+  padding: 5px;
+}
+#whatsapp:hover i {
+  color: #25d366;
+}
+#info:hover i {
+  color: #00ffff;
 }
 .title {
   font-size: 50px;
@@ -61,7 +100,7 @@ body {
   color: #000;
 }
 .aya,
-span {
+#sura {
   display: flex;
   flex-wrap: wrap;
   line-height: 1.6;
@@ -88,7 +127,7 @@ span {
   text-shadow: 0 0 15px #fff;
   box-shadow: 0 0 10px #ddd;
 }
-i {
+#copy {
   position: absolute;
   right: 20px;
   bottom: 20px;
@@ -100,8 +139,7 @@ i {
   font-size: 45px;
   transition: all 0.5s ease;
 }
-i:hover,
-i:focus {
+#copy:hover {
   color: #fff;
   background: #007b7b;
   box-shadow: 0 0 10px #00ffff;
@@ -121,4 +159,59 @@ i:focus {
   color: #fff;
   background: #1b1b1b75;
   text-shadow: 0 0 15px #fff;
+}
+.hide {
+  display: none;
+}
+.info-container {
+  width: 100%;
+  height: 112vh;
+  position: fixed;
+  background: #000000dd;
+  z-index: 999;
+}
+.info-box {
+  width: 350px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  background: #00ffffaa;
+  padding: 20px 10px;
+  border-radius: 10px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.6;
+  font-size: 20px;
+}
+.info-box-title {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+.info-box-text {
+  font-size: 24px;
+}
+#xmark {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  #xmark {
+    right: 20px;
+    top: 20px;
+  }
 }

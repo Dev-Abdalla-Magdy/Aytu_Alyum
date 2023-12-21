@@ -5,16 +5,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>آيَّة اَلْيَوْمَ</title>
-  <link rel="shortcut icon" href="quran.png" type="image/png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="imgs/quran.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/loading.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+  <!-- ==.==.==.==.== Start Loading Page ==.==.==.==.== -->
+  <div class="loading-page" id="loadin_page">
+    <div class="loading-container">
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+      <div class="loading-box"></div>
+    </div>
+    <div class="loading-text">جار التحميل...</div>
+  </div>
+  <!-- ==.==.==.==.== End Loading Page ==.==.==.==.== -->
+
+  <!-- ==.==.==.==.== Start Main Page Of App ==.==.==.==.== -->
   <div class="app">
+    <div class="contact">
+      <a href="https://api.whatsapp.com/send?phone=+201032296981&text=السلام عليكم ورحة الله وبركاته عندي ملاحظة في التطبيق!
+      " id="whatsapp">
+        <i class="contactme fa-brands fa-whatsapp" title="تواصل مع المطور"></i>
+      </a>
+      <a href="#" id="info">
+        <i class="fa-solid fa-circle-info" title="معلومات عن التطبيق"></i>
+      </a>
+    </div>
+
+    <div class="info-container hide" id="info_box">
+      <i class="fa-solid fa-xmark" id="xmark"></i>
+      <div class="info-box">
+        <h2 class="info-box-title">معلومات عن التطبيق</h2>
+        <p class="info-box-text">
+          تطبيق "آية اليوم" هو تطبيق يختار آية من 6236 آية من كتاب الله
+          عن طريق الضغط على زر "اختر لي" تظهر الآية تقرأها وتأخذ الأجر والمطور يأخذالأجر ونفع الله
+          بي وبكم ورزقنا الجنان اللهم آمين 🤲
+        </p>
+      </div>
+    </div>
+
     <h1 class="title">آيَّة اَلْيَوْمَ</h1>
+
     <div class="container">
       <div class="text">
         <div class="aya" id="aya">
@@ -25,15 +83,19 @@
       <button class="btn" id="btn">اختر لي</button>
       <i class="fa-solid fa-copy" id="copy" title="نسخ"></i>
     </div>
+
     <div class="footer">
-      © 2023 Dev.3ME 💖
+      © 2023 Dev.3ME 💛
     </div>
+
   </div>
+  <!-- ==.==.==.==.== End Main Page Of App ==.==.==.==.== -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
     integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="main.js"></script>
+  <script src="assets/js/loading.js" id="loading_script"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>
