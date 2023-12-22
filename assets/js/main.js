@@ -5,7 +5,7 @@ let copyBtn = document.getElementById("copy");
 let loadingPage = document.getElementById("loadin_page");
 let infoBtn = document.getElementById("info");
 let infoBox = document.getElementById("info_box");
-let xMark = document.getElementById("xmark");
+let xMarkBtn = document.getElementById("xmark");
 let loadingScript = document.getElementById("loading_script");
 
 /* =.=.=.=.= Loading Page Time =.=.=.=.= */
@@ -16,13 +16,14 @@ let loadingFunction = setInterval(() => {
 
 info.addEventListener("click", showInfo);
 
+xMarkBtn.addEventListener("click", hideInfo);
+
 function showInfo() {
   infoBox.classList.remove("hide");
 }
-
-xMark.addEventListener("click", () => {
+function hideInfo() {
   infoBox.classList.add("hide");
-});
+}
 
 chooseAyaBtn.addEventListener("click", chooseRandom);
 
