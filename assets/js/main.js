@@ -55,15 +55,17 @@ function chooseRandom() {
         .then((data) => {
           currentSura = data.data[currentSuraId - 1].name;
           sura.innerHTML = `-- ${currentSura} (${currentAyaId}) --`;
+
+          copyBtn.addEventListener("click", copyText);
+
+          function copyText() {
+            navigator.clipboard.writeText(
+              `${currentAya}\n-- ${currentSura} (${currentAyaId}) --`
+            );
+          }
         });
       return currentAya;
     });
-
-  copyBtn.addEventListener("click", copyText);
-
-  function copyText() {
-    navigator.clipboard.writeText(`${currentAya}`);
-  }
 
   gsap.fromTo(
     aya,
