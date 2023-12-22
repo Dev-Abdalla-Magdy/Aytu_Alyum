@@ -23,7 +23,7 @@ body {
   z-index: 9999;
   left: 0;
   top: 0;
-  background: #000000dd;
+  background: rgba(0, 0, 0, 0.95);
 }
 .loading-container {
   width: 54px;
