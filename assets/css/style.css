@@ -9,7 +9,7 @@
 body {
   background: rgba(0, 123, 123, 0.75);
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-family: "Rubik", sans-serif;
 }
 .hide {
@@ -24,16 +24,17 @@ body {
   justify-content: space-between;
   text-align: center;
   position: relative;
-  gap: 20px;
 }
 @media (min-width: 768px) {
   .app {
-    gap: 50px;
+    gap: 20px;
   }
 }
 /* ========== Header Section ========== */
 .header-section {
   width: 100%;
+  border-bottom: 1px solid #dddddd50;
+  margin-bottom: 10px;
 }
 .header-section .contact {
   display: flex;
@@ -41,7 +42,6 @@ body {
   justify-content: space-between;
   width: 100%;
   padding: 10px 20px;
-  border-bottom: 1px solid #dddddd50;
 }
 #whatsapp,
 #info {
@@ -77,7 +77,7 @@ body {
 }
 .info-box {
   width: 350px;
-  height: 400px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,11 +126,30 @@ body {
 }
 /* ========== Header Section ========== */
 /* ========== Body Section ========== */
+.body-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.title-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  gap: 10px;
+}
 .title {
-  font-size: 50px;
+  font-size: 36px;
   color: #fff;
   filter: drop-shadow(0px 5px 15px #fff);
-  margin-bottom: 20px;
+  width: 100%;
+}
+.img img {
+  max-width: 100%;
+  border-radius: 10px;
 }
 .body-content {
   display: flex;
@@ -207,14 +226,24 @@ body {
 }
 /* ========== Body Section ========== */
 /* ========== Visitors Section ========== */
-.visits-container {
+.visits-container,
+.date-container {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
   width: 100%;
-  padding: 20px 0;
+  padding: 0 20px;
+  gap: 10px;
+  width: 100%;
+  justify-content: space-between;
 }
-.visits-container .content {
+@media (min-width: 540px) {
+  .visits-container,
+  .date-container {
+    justify-content: center;
+    flex-direction: row;
+  }
+}
+.visits-container .content,
+.date-container .content {
   padding: 10px;
   background: #00000099;
   border-radius: 10px;
@@ -222,17 +251,33 @@ body {
   color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   gap: 10px;
-  width: 150px;
+  width: 9rem;
 }
-.visits-container .content h4 {
+@media (min-width: 540px) {
+  .visits-container .content,
+  .date-container .content {
+    width: 250px;
+  }
+}
+.date-container .content {
+  justify-content: normal;
+}
+.visits-container .content h4,
+.date-container .content h4 {
   font-size: 18px;
 }
-.visits-container .content span {
+.visits-container .content span,
+.day-container .content span {
   font-size: 24px;
   font-weight: bold;
+  color: #00ffff;
+}
+.date-container .content span {
+  font-weight: bold;
+  font-size: 18px;
   color: #00ffff;
 }
 /* ========== Visitors Section ========== */
@@ -249,5 +294,6 @@ body {
   color: #fff;
   background: #1b1b1b75;
   text-shadow: 0 0 5px #00ffff;
+  margin-top: 10px;
 }
 /* ========== Footer Section ========== */

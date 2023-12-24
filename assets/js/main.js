@@ -25,6 +25,30 @@ function hideInfo() {
   infoBox.classList.add("hide");
 }
 
+let hijri = document.getElementById("hijri");
+let frinji = document.getElementById("frinji");
+let day = document.getElementById("day");
+
+let tDate = new Intl.DateTimeFormat("ar-US", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(Date.now());
+
+let hDate = new Intl.DateTimeFormat("ar-US-u-ca-islamic", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(Date.now());
+
+let dayDate = new Intl.DateTimeFormat("ar-US-u-ca-islamic", {
+  weekday: "long",
+}).format(Date.now());
+
+frinji.innerHTML = `${tDate} م`;
+hijri.innerHTML = `${hDate}`;
+day.innerHTML = `${dayDate}`;
+
 chooseAyaBtn.addEventListener("click", chooseRandom);
 
 function chooseRandom() {
@@ -33,13 +57,13 @@ function chooseRandom() {
   fetch("https://api.alquran.cloud/v1/quran/ar.asad")
     .then((res) => res.json())
     .then((data) => {
-      const ranSura = Math.floor(Math.random() * data.data.surahs.length);
+      let ranSura = Math.floor(Math.random() * data.data.surahs.length);
       currentSura = data.data.surahs[ranSura];
 
-      const ranAya = Math.floor(Math.random() * currentSura.ayahs.length);
+      let ranAya = Math.floor(Math.random() * currentSura.ayahs.length);
       currentAya = currentSura.ayahs[ranAya];
 
-      let ayaText = `"${currentAya.text}"`;
+      let ayaText = `" ${currentAya.text} "`;
       let suraText = `-- ${currentSura.name} (${currentAya.numberInSurah}) --`;
 
       if (currentAya.numberInSurah === 1) {
@@ -56,7 +80,10 @@ function chooseRandom() {
       copyBtn.addEventListener("click", copyText);
 
       function copyText() {
-        navigator.clipboard.writeText(`${ayaText}\n${suraText}`);
+        navigator.clipboard.writeText(
+          `===== ${dayDate} =====\n${hDate}\n${tDate} م\n${ayaText}\n${suraText}
+        `
+        );
       }
     });
 
