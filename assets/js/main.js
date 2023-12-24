@@ -37,12 +37,20 @@ function chooseRandom() {
       currentSura = data.data.surahs[ranSura];
 
       const ranAya = Math.floor(Math.random() * currentSura.ayahs.length);
-      currentAya = currentSura.ayahs[ranAya];
+      currentAya = currentSura.ayahs[0];
 
       let ayaText = `"${currentAya.text}"`;
-      aya.innerHTML = ayaText;
-
       let suraText = `-- ${currentSura.name} (${currentAya.numberInSurah}) --`;
+
+      if (currentAya.numberInSurah === 1) {
+        if (
+          currentAya.text.includes("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ")
+        ) {
+          ayaText = `"${currentAya.text.slice(38)}"`;
+        }
+      }
+
+      aya.innerHTML = ayaText;
       sura.innerHTML = suraText;
 
       copyBtn.addEventListener("click", copyText);
