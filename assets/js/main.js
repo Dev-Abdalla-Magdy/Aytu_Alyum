@@ -12,7 +12,7 @@ let loadingScript = document.getElementById("loading_script");
 let loadingFunction = setInterval(() => {
   loadingPage.style.display = "none";
   loadingScript.remove();
-}, 3500);
+}, 3000);
 
 info.addEventListener("click", showInfo);
 
@@ -30,41 +30,26 @@ chooseAyaBtn.addEventListener("click", chooseRandom);
 function chooseRandom() {
   let currentAya, currentSura;
 
-  fetch("https://api.quran.com/api/v4/quran/verses/indopak")
+  fetch("https://api.alquran.cloud/v1/quran/ar.asad")
+    .then((res) => res.json())
     .then((data) => {
-      let res = data.json();
-      return res;
-    })
-    .then((data) => {
-      let ranAyah = Math.floor(Math.random() * data.verses.length);
-      currentAya = data.verses[ranAyah].text_indopak;
-      aya.innerHTML = `" ${currentAya} "`;
+      const ranSura = Math.floor(Math.random() * data.data.surahs.length);
+      currentSura = data.data.surahs[ranSura];
 
-      let regex = /([^:\s]+)/g;
-      let currentSuraId = parseInt(
-        data.verses[ranAyah].verse_key.match(regex)[0]
-      );
-      let currentAyaId = parseInt(
-        data.verses[ranAyah].verse_key.match(regex)[1]
-      );
-      fetch("https://api.alquran.cloud/v1/surah")
-        .then((data) => {
-          let res = data.json();
-          return res;
-        })
-        .then((data) => {
-          currentSura = data.data[currentSuraId - 1].name;
-          sura.innerHTML = `-- ${currentSura} (${currentAyaId}) --`;
+      const ranAya = Math.floor(Math.random() * currentSura.ayahs.length);
+      currentAya = currentSura.ayahs[ranAya];
 
-          copyBtn.addEventListener("click", copyText);
+      let ayaText = `"${currentAya.text}"`;
+      aya.innerHTML = ayaText;
 
-          function copyText() {
-            navigator.clipboard.writeText(
-              `${currentAya}\n-- ${currentSura} (${currentAyaId}) --`
-            );
-          }
-        });
-      return currentAya;
+      let suraText = `-- ${currentSura.name} (${currentAya.numberInSurah}) --`;
+      sura.innerHTML = suraText;
+
+      copyBtn.addEventListener("click", copyText);
+
+      function copyText() {
+        navigator.clipboard.writeText(`${ayaText}\n${suraText}`);
+      }
     });
 
   gsap.fromTo(
@@ -95,27 +80,3 @@ function chooseRandom() {
     }
   );
 }
-
-/* -.-.-.-.- Visitors & Pageviews Counter -.-.-.-.- */
-const pageviewsCount = document.getElementById("pageviews_count");
-const visitsCount = document.getElementById("visits_count");
-
-if (sessionStorage.getItem("visit") === null) {
-  // New visit and pageview
-  updateCounter("type=visit-pageview");
-} else {
-  // Pageview
-  updateCounter("type=pageview");
-}
-
-function updateCounter(type) {
-  fetch("http://127.0.0.1:3002/api?" + type) // Dynamic request with URL parameter
-    .then((res) => res.json())
-    .then((data) => {
-      pageviewsCount.textContent = data.pageviews; // Display pageviews to user
-      visitsCount.textContent = data.visits; // Display visits to user
-    });
-}
-
-sessionStorage.setItem("visit", "x");
-// 'visit' item persists in storage for the remainder of the user session
