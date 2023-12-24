@@ -37,7 +37,7 @@ function chooseRandom() {
       currentSura = data.data.surahs[ranSura];
 
       const ranAya = Math.floor(Math.random() * currentSura.ayahs.length);
-      currentAya = currentSura.ayahs[0];
+      currentAya = currentSura.ayahs[ranAya];
 
       let ayaText = `"${currentAya.text}"`;
       let suraText = `-- ${currentSura.name} (${currentAya.numberInSurah}) --`;
