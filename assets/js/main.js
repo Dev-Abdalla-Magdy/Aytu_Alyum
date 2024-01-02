@@ -29,19 +29,19 @@ let hijri = document.getElementById("hijri");
 let frinji = document.getElementById("frinji");
 let day = document.getElementById("day");
 
-let tDate = new Intl.DateTimeFormat("ar-US", {
+let tDate = new Intl.DateTimeFormat("ar-EG", {
   day: "numeric",
   month: "long",
   year: "numeric",
 }).format(Date.now());
 
-let hDate = new Intl.DateTimeFormat("ar-US-u-ca-islamic", {
+let hDate = new Intl.DateTimeFormat("ar-SA-islamic-umalqura", {
   day: "numeric",
   month: "long",
   year: "numeric",
 }).format(Date.now());
 
-let dayDate = new Intl.DateTimeFormat("ar-US-u-ca-islamic", {
+let dayDate = new Intl.DateTimeFormat("ar-SA-islamic-umalqura", {
   weekday: "long",
 }).format(Date.now());
 
