@@ -173,6 +173,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 }
 ::selection {
   background: #fff;
@@ -207,7 +208,8 @@ body {
   text-shadow: 0 0 15px #fff;
   box-shadow: 0 0 10px #ddd;
 }
-#copy {
+#copy,
+#number_ayat {
   position: absolute;
   right: 20px;
   bottom: 20px;
@@ -218,6 +220,14 @@ body {
   border-radius: 5px;
   font-size: 45px;
   transition: all 0.5s ease;
+}
+#number_ayat {
+  left: 20px;
+  border: none;
+  width: 60px;
+  right: auto;
+  height: 65px;
+  outline: none;
 }
 #copy:hover {
   color: #fff;

@@ -2,6 +2,7 @@ let aya = document.getElementById("aya");
 let sura = document.getElementById("sura");
 let chooseAyaBtn = document.getElementById("btn");
 let copyBtn = document.getElementById("copy");
+let numAyatBtn = document.getElementById("number_ayat");
 let loadingPage = document.getElementById("loadin_page");
 let infoBtn = document.getElementById("info");
 let infoBox = document.getElementById("info_box");
@@ -52,6 +53,7 @@ day.innerHTML = `${dayDate}`;
 chooseAyaBtn.addEventListener("click", chooseRandom);
 
 function chooseRandom() {
+  aya.innerHTML = "";
   let currentAya, currentSura;
 
   fetch("https://api.alquran.cloud/v1/quran/ar.asad")
@@ -61,32 +63,43 @@ function chooseRandom() {
       currentSura = data.data.surahs[ranSura];
 
       let ranAya = Math.floor(Math.random() * currentSura.ayahs.length);
-      currentAya = currentSura.ayahs[ranAya];
 
-      let ayaText = `" ${currentAya.text} "`;
-      let suraText = `-- ${currentSura.name} (${currentAya.numberInSurah}) --`;
+      if (+numAyatBtn.value >= 1) {
+        for (let i = 0; i < +numAyatBtn.value; i++) {
+          currentAya = currentSura.ayahs[ranAya + i];
+          if (currentAya.numberInSurah) {
+            let ayaText = ` ${currentAya.text} {${currentAya.numberInSurah}} `;
+            let suraText = `-- ${currentSura.name} {${currentAya.numberInSurah}:${currentSura.number}} --`;
+            if (currentAya.numberInSurah === 1) {
+              if (
+                currentAya.text.includes(
+                  "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ"
+                )
+              ) {
+                ayaText = `${currentAya.text.slice(38)} {${
+                  currentAya.numberInSurah
+                }} `;
+              }
+            }
 
-      if (currentAya.numberInSurah === 1) {
-        if (
-          currentAya.text.includes("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ")
-        ) {
-          ayaText = `"${currentAya.text.slice(38)}"`;
+            aya.innerHTML += ayaText;
+            sura.innerHTML = suraText;
+
+            copyBtn.addEventListener("click", copyText);
+
+            function copyText() {
+              navigator.clipboard.writeText(
+                `===== ${dayDate} =====\n${hDate}\n${tDate} م\n" ${aya.innerHTML} "\n${suraText}
+                `
+              );
+            }
+          }
         }
-      }
-
-      aya.innerHTML = ayaText;
-      sura.innerHTML = suraText;
-
-      copyBtn.addEventListener("click", copyText);
-
-      function copyText() {
-        navigator.clipboard.writeText(
-          `===== ${dayDate} =====\n${hDate}\n${tDate} م\n${ayaText}\n${suraText}
-        `
-        );
+      } else {
+        aya.innerHTML = `" اكتب عدد الآيات التي تريد قرائتها "`;
+        sura.innerHTML = `-- خطأ في العدد --`;
       }
     });
-
   gsap.fromTo(
     aya,
     {
