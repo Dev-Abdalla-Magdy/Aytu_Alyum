@@ -8,16 +8,35 @@ let infoBtn = document.getElementById("info");
 let infoBox = document.getElementById("info_box");
 let xMarkBtn = document.getElementById("xmark");
 let loadingScript = document.getElementById("loading_script");
-
+let langBtn = document.getElementById("lang_en");
+let langIcon = document.getElementById("en");
+let languageAr = "ar";
+let languageEn = "en";
+let language = languageAr;
 /* =.=.=.=.= Loading Page Time =.=.=.=.= */
 let loadingFunction = setInterval(() => {
   loadingPage.style.display = "none";
-  loadingScript.remove();
 }, 3000);
 
 info.addEventListener("click", showInfo);
 
 xMarkBtn.addEventListener("click", hideInfo);
+
+langBtn.addEventListener("click", changeLang);
+
+function changeLang() {
+  if (language === "ar" || language === "") {
+    language = languageEn;
+    langIcon.className = `fa-solid fa-a ico`;
+    document.body.style.direction = "ltr";
+    chooseAyaBtn.innerHTML = "Choose";
+  } else if (language === "en") {
+    language = languageAr;
+    langIcon.className = `fa-solid fa-e ico`;
+    document.body.style.direction = "rtl";
+    chooseAyaBtn.innerHTML = "اختر لي";
+  }
+}
 
 function showInfo() {
   infoBox.classList.remove("hide");
@@ -30,23 +49,23 @@ let hijri = document.getElementById("hijri");
 let frinji = document.getElementById("frinji");
 let day = document.getElementById("day");
 
-let tDate = new Intl.DateTimeFormat("ar-EG", {
+let tDate = new Intl.DateTimeFormat(`ar-EG`, {
   day: "numeric",
   month: "long",
   year: "numeric",
 }).format(Date.now());
 
-let hDate = new Intl.DateTimeFormat("ar-SA-islamic-umalqura", {
+let hDate = new Intl.DateTimeFormat(`ar-SA-islamic-umalqura`, {
   day: "numeric",
   month: "long",
   year: "numeric",
 }).format(Date.now());
 
-let dayDate = new Intl.DateTimeFormat("ar-SA-islamic-umalqura", {
+let dayDate = new Intl.DateTimeFormat(`ar-SA-islamic-umalqura`, {
   weekday: "long",
 }).format(Date.now());
 
-frinji.innerHTML = `${tDate} م`;
+frinji.innerHTML = `${tDate}`;
 hijri.innerHTML = `${hDate}`;
 day.innerHTML = `${dayDate}`;
 
@@ -56,7 +75,7 @@ function chooseRandom() {
   aya.innerHTML = "";
   let currentAya, currentSura;
 
-  fetch("https://api.alquran.cloud/v1/quran/ar.asad")
+  fetch(`https://api.alquran.cloud/v1/quran/${language}.asad`)
     .then((res) => res.json())
     .then((data) => {
       let ranSura = Math.floor(Math.random() * data.data.surahs.length);
@@ -69,8 +88,13 @@ function chooseRandom() {
           currentAya = currentSura.ayahs[ranAya + i];
           if (currentAya.numberInSurah) {
             let ayaText = ` ${currentAya.text} {${currentAya.numberInSurah}} `;
-            let suraText = `-- ${currentSura.name} {${currentAya.numberInSurah}:${currentSura.number}} --`;
-            if (currentAya.numberInSurah === 1) {
+            if (language === languageAr) {
+              nameOfSura = currentSura.name;
+            } else {
+              nameOfSura = currentSura.englishName;
+            }
+            let suraText = `-- ${nameOfSura} {${currentAya.numberInSurah}:${currentSura.number}} --`;
+            if (currentAya.numberInSurah === 1 && currentSura.number !== 1) {
               if (
                 currentAya.text.includes(
                   "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ"

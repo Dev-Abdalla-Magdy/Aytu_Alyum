@@ -4,13 +4,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  direction: rtl;
 }
 body {
   background: rgba(0, 123, 123, 0.75);
   height: 100vh;
   width: 100%;
   font-family: "Rubik", sans-serif;
+  direction: rtl;
 }
 .hide {
   display: none;
@@ -43,8 +43,15 @@ body {
   width: 100%;
   padding: 10px 20px;
 }
-#whatsapp,
-#info {
+.header-section .left-side {
+  display: flex;
+  gap: 20px;
+}
+.header-section .right-side {
+  display: flex;
+  gap: 20px;
+}
+.header-section .ico-h {
   display: block;
   width: 40px;
   height: 40px;
@@ -53,8 +60,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-#whatsapp i,
-#info i {
+.header-section .ico {
   font-size: 40px;
   border-radius: 10px;
   color: #fff;
@@ -64,7 +70,13 @@ body {
 #whatsapp:hover i {
   color: #25d366;
 }
+#facebook:hover i {
+  color: #25d366;
+}
 #info:hover i {
+  color: #00ffff;
+}
+#lang_en:hover i {
   color: #00ffff;
 }
 .info-container {
