@@ -8,11 +8,6 @@ let infoBtn = document.getElementById("info");
 let infoBox = document.getElementById("info_box");
 let xMarkBtn = document.getElementById("xmark");
 let loadingScript = document.getElementById("loading_script");
-let langBtn = document.getElementById("lang_en");
-let langIcon = document.getElementById("en");
-let languageAr = "ar";
-let languageEn = "en";
-let language = languageAr;
 /* =.=.=.=.= Loading Page Time =.=.=.=.= */
 let loadingFunction = setInterval(() => {
   loadingPage.style.display = "none";
@@ -21,22 +16,6 @@ let loadingFunction = setInterval(() => {
 info.addEventListener("click", showInfo);
 
 xMarkBtn.addEventListener("click", hideInfo);
-
-langBtn.addEventListener("click", changeLang);
-
-function changeLang() {
-  if (language === "ar" || language === "") {
-    language = languageEn;
-    langIcon.className = `fa-solid fa-a ico`;
-    document.body.style.direction = "ltr";
-    chooseAyaBtn.innerHTML = "Choose";
-  } else if (language === "en") {
-    language = languageAr;
-    langIcon.className = `fa-solid fa-e ico`;
-    document.body.style.direction = "rtl";
-    chooseAyaBtn.innerHTML = "اختر لي";
-  }
-}
 
 function showInfo() {
   infoBox.classList.remove("hide");
@@ -75,10 +54,11 @@ function chooseRandom() {
   aya.innerHTML = "";
   let currentAya, currentSura;
 
-  fetch(`https://api.alquran.cloud/v1/quran/${language}.asad`)
+  fetch(`https://api.alquran.cloud/v1/quran/ar.asad`)
     .then((res) => res.json())
     .then((data) => {
       let ranSura = Math.floor(Math.random() * data.data.surahs.length);
+
       currentSura = data.data.surahs[ranSura];
 
       let ranAya = Math.floor(Math.random() * currentSura.ayahs.length);
@@ -86,14 +66,12 @@ function chooseRandom() {
       if (+numAyatBtn.value >= 1) {
         for (let i = 0; i < +numAyatBtn.value; i++) {
           currentAya = currentSura.ayahs[ranAya + i];
+
           if (currentAya.numberInSurah) {
             let ayaText = ` ${currentAya.text} {${currentAya.numberInSurah}} `;
-            if (language === languageAr) {
-              nameOfSura = currentSura.name;
-            } else {
-              nameOfSura = currentSura.englishName;
-            }
-            let suraText = `-- ${nameOfSura} {${currentAya.numberInSurah}:${currentSura.number}} --`;
+
+            let suraText = `-- ${currentSura.name} {${currentAya.numberInSurah}:${currentSura.number}} --`;
+
             if (currentAya.numberInSurah === 1 && currentSura.number !== 1) {
               if (
                 currentAya.text.includes(
